@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arduino Sensors</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Arduino Sensors</h1>
+  <p>Motion Sensor: <span id="motion"></span></p>
+  <p>Temperature: <span id="temperature"></span>&#8451;</p>
+  <p>Humidity: <span id="humidity"></span>%</p>
+
+  <script>
+    function fetchData() {
+      $.getJSON("http://192.168.1.178", function(data) {
+        $("#motion").text(data.motion);
+        $("#temperature").text(data.temperature);
+        $("#humidity").text(data.humidity);
+      });
+    }
+
+    // Fetch data initially
+    fetchData();
+
+    // Fetch data every 5 seconds
+    setInterval(fetchData, 5000);
+  </script>
+</body>
+</html>
